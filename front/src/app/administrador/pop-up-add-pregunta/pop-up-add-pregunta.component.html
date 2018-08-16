@@ -1,0 +1,75 @@
+<!-- <form class="example-form">
+
+  <mat-form-field style="width:100%" class="example-full-width" >
+    <textarea [(ngModel)]="texto" name="texto" matInput placeholder="Agrega una pregunta"></textarea>
+  </mat-form-field>
+</form>
+
+
+  <mat-form-field>
+    <mat-select placeholder="Seleccione una categoria" [(ngModel)]="cat">
+      <mat-option *ngFor="let cat of categories" [value]="cat.codigo">
+        {{ cat.nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+<div style="display:flex">
+  <button mat-raised-button name="button" (click)="cancel()">cancelar</button>
+  <button mat-raised-button name="button" (click)="closeDialog()">Agregar</button>
+</div> -->
+
+<form [formGroup]="preguntasForm" #formDirective="ngForm">
+  <ng-template matStepLabel>Agregar preguntas</ng-template>
+  <div fxLayout="row">
+  <mat-form-field>
+    <input  matInput formControlName="pregunta" placeholder="Pregunta" required>
+    <mat-hint><span>Texto de la pregunta</span></mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+  <mat-select formControlName="tipo" placeholder="Tipo" multiple>
+    <mat-option value="CERRADA" selected>Cerrada</mat-option>
+    <mat-option value="ABIERTA">Abierta</mat-option>
+    <mat-option value="MIXTA">Mixta</mat-option>
+  </mat-select>
+  </mat-form-field>
+  </div>
+  <div fxLayout="row">
+    <mat-checkbox style="margin-right: 20px;" formControlName="otro" labelPosition='before'>¿Opción Otro?</mat-checkbox>
+    <mat-checkbox formControlName="unica" labelPosition='before'>¿Opción Unica?</mat-checkbox>
+  </div>
+  <div fxLayout="row">
+  <mat-form-field>
+    <mat-select formControlName="tema" placeholder="Tema" multiple>
+      <mat-option *ngFor="let tema of categories" value="{{tema.tema}}" selected>{{tema.descripcion}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+      <mat-select formControlName="tipodato" placeholder="Tipo de dato" multiple>
+        <mat-option value="NUMERICO" selected>Numerico</mat-option>
+        <mat-option value="TEXTO_CORTO">Texto Corto</mat-option>
+        <mat-option value="tEXTO_LARGO">Texto Larco</mat-option>
+      </mat-select>
+      </mat-form-field>
+  </div>
+  <ng-container formArrayName="opciones">
+    <div fxLayout="columns" *ngFor="let opcion of opciones.controls; let i = index" [formGroupName]="i">
+        <mat-form-field>
+            <input  matInput formControlName="texto" placeholder="Opcion" required>
+            <mat-hint><span>Texto de la opcion</span></mat-hint>
+        </mat-form-field>
+        <mat-checkbox formControlName="mixta" labelPosition='after'>¿Mixta?</mat-checkbox>
+    </div>
+  </ng-container>
+  <button mat-raised-button type="button" (click)="agregarOpcion()">
+      Agregar opción.
+    </button>
+</form>
+<br>
+<br>
+
+<div fxLayout="row">
+    <button mat-raised-button name="button" (click)="cancel()">cancelar</button>
+    <button mat-raised-button name="button" (click)="closeDialog()">Agregar</button>
+  </div>
+  

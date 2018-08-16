@@ -1,0 +1,106 @@
+
+	<div class="principal">
+      <a class="float" matTooltip="Agregar pregunta" matTooltipPosition="above" (click)="agregarPregunta();" mat-fab >
+      <mat-icon style="size:40px;font-size:24px; font-weight:bold">add</mat-icon>
+    </a>
+
+    <div class="bar-container">
+        <span class="myspan">Administar > Ver Encuestas </span>
+      </div>
+
+      <div style="height:2%">
+          <span></span>
+        </div>
+    
+        <div class="myBar">
+          <!--<span>{{(opcion!="materia")?"Seleccione un "+ opcion : "Seleccione una "+ opcion}}</span>-->
+          <span>Administrar Cuestionarios</span>
+        </div>
+        <div class="myform">
+        <form  [formGroup]="encuestaForm" #formDirective="ngForm">
+            <mat-form-field>
+                <mat-select placeholder="Punto de aplicacion" formControlName="punto" required>
+                  <mat-option *ngFor="let punto of puntos" [value]="punto.idPunto">
+                    {{punto.descripcion}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint><span>Punto de aplicacion de la encuesta</span></mat-hint>
+              </mat-form-field>
+              <mat-form-field>
+                  <input  matInput formControlName="identificacion" placeholder="Identificacion de la encuesta" required>
+                  <mat-hint><span>Identificacion de la encuesta</span></mat-hint>
+              </mat-form-field>
+              <mat-form-field>
+                  <input  matInput formControlName="nombre" placeholder="Nombre de la encuesta" required>
+                  <mat-hint><span>Nombre de la encuesta</span></mat-hint>
+              </mat-form-field>
+              <div fxLayout="row">
+              <mat-form-field>
+                  <input matInput formControlName="fechaInicio" [matDatepicker]="fechaInicio" placeholder="Fecha de inicio" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+                  <mat-datepicker #fechaInicio></mat-datepicker>
+                  <mat-hint>
+                    <span>Fecha de inicio de la encuesta</span>
+                </mat-hint>
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput formControlName="fechaFin" [matDatepicker]="fechaFin" placeholder="Fecha de fin" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="fechaFin"></mat-datepicker-toggle>
+                  <mat-datepicker #fechaFin></mat-datepicker>
+                  <mat-hint>
+                    <span>Fecha de inicio de la encuesta</span>
+                </mat-hint>
+              </mat-form-field>
+              </div>
+              <br>
+              <div fxLayout="row">
+              <mat-checkbox style="margin-right: 20px;" formControlName="modificable" labelPosition='before'>Modificable?</mat-checkbox>
+              <mat-checkbox style="margin-right: 20px;" formControlName="logeo" labelPosition='before'>¿Requiere logeo?</mat-checkbox>
+              <mat-checkbox style="margin-right: 20px;" formControlName="secreta" labelPosition='before'>¿Es secreta?</mat-checkbox>
+              </div>
+              <div fxLayout="row">
+              <mat-form-field>
+                  <input  matInput formControlName="sql" placeholder="sql" required>
+                  <mat-hint><span>SQL personas que aplica</span></mat-hint>
+              </mat-form-field>
+              <mat-form-field>
+                  <input  matInput formControlName="encabezado" placeholder="Encabezado de la encuesta" required>
+                  <mat-hint><span>Encabezado de la encuesta</span></mat-hint>
+              </mat-form-field>
+              <mat-form-field>
+                  <input  matInput formControlName="estructura" placeholder="Estructura" required>
+                  <mat-hint><span>Estructura metadato</span></mat-hint>
+              </mat-form-field>
+              </div>
+              <button mat-button (click)="crearEncuesta(encuestaForm)">Crear encuesta</button>
+              <div fxLayout="column">
+                  <ng-container formArrayName="preguntas">
+                      <div fxLayout="columns" *ngFor="let pregun of preguntas.controls; let i = index" [formGroupName]="i">
+                          <mat-form-field>
+                              <mat-select placeholder="Pregunta" formControlName="pregunta" required>
+                                <mat-option *ngFor="let preg of todasPreguntas" [value]="preg.numero">
+                                  {{preg.pregunta}}
+                                </mat-option>
+                              </mat-select>
+                              <mat-hint><span>Seleccione una pregunta</span></mat-hint>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="number" matInput formControlName="orden" placeholder="Orden" required>
+                                <mat-hint><span>Orden en que se mostraran la pregunta</span></mat-hint>
+                            </mat-form-field>
+                            <mat-checkbox style="margin-right: 20px;" formControlName="esSeccion" labelPosition='before'>¿encabezado de sección?</mat-checkbox>
+                            <mat-form-field *ngIf="pregun.value.esSeccion">
+                                <input matInput formControlName="seccion" placeholder="Seccion" >
+                                <mat-hint><span>Texto de la seccion</span></mat-hint>
+                            </mat-form-field>
+                            <mat-checkbox style="margin-right: 20px;" formControlName="obligatoria" labelPosition='before'>¿obligatoria?</mat-checkbox>
+
+                      </div>
+                    </ng-container>
+                    <button mat-button (click)="agregarPreguntas(preguntas.controls,encuestaForm)">agregar preguntas</button>
+              </div>
+        </form>
+        </div>
+  
+  </div>
+  

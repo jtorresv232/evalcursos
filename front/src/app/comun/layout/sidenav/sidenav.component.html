@@ -1,0 +1,26 @@
+<div class="sidenav" id="sidenav">
+
+	<ul>
+
+    <li *ngFor="let option of options" style="cursor:pointer" [ngClass]="getOption(option.nombre)" matTooltip="{{option.nombre}}" matTooltipPosition="after" (click)="reDireccionar(option.url)">
+			<div class="menus" >
+				<mat-icon style="flex:1">{{option.icon}}</mat-icon>
+				<span style="flex:7;font-size:15px;padding-top:3px" *ngIf="show">{{option.nombre}}</span>
+			</div>
+
+		</li>
+
+		<mat-divider></mat-divider>
+
+    <!--<mat-button (click)="whenClick()" mat-icon-button style="cursor: pointer;color:black; position:fixed;bottom:10px;left:10.5%">
+      <mat-icon>radio_button_checked</mat-icon>
+    </mat-button>-->
+
+
+	</ul>
+	<button mat-icon-button (click)="whenClick()" class="float">
+	  <mat-icon class="toggleIcon">{{show?"chevron_left":"chevron_right"}}</mat-icon>
+	</button>
+
+
+</div>

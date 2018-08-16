@@ -1,0 +1,55 @@
+
+	<div class="principal">
+		<a class="float" matTooltip="Agregar Pregunta" matTooltipPosition="above" (click)="openDialog();" mat-fab >
+		<mat-icon style="size:40px;font-size:24px; font-weight:bold">add</mat-icon>
+	</a>
+
+
+		<!--Progress-->
+		<div class="bar-container">
+	    <span class="myspan">Administrar > Preguntas </span>
+	  </div>
+		<!--FIN progress-->
+
+		<!--thing-->
+		
+		<!-- fin thing -->
+			<!--Table-->
+
+		<div style="height:2%">
+			<span></span>
+		</div>
+
+		<div class="myBar">
+			<!--<span>{{(opcion!="materia")?"Seleccione un "+ opcion : "Seleccione una "+ opcion}}</span>-->
+			<span>Administrar Preguntas</span>
+		</div>
+
+
+		<div style="height:2%">
+			<span></span>
+		</div>
+
+
+
+  <div class="mylist">
+    <ul class="listul" *ngFor="let miCategoria of misCategorias">
+      <h3 class="myh3">{{miCategoria.descripcion}}</h3>
+      <div class="grabbable" draggable="true" (dragenter)="dragenter($event)" (dragstart)="dragstart($event)" *ngFor="let miPregunta of misPreguntas | filterByCategoria:miCategoria.tema">
+      <li  class="listli" >{{miPregunta.pregunta}}
+				<span class="spacer"></span><span style="color:gray">({{miPregunta.tipodato + ' '}})</span>{{(miPregunta.opcion_otro=='S')? 'Otro  ':''}}{{(miPregunta.opcion_unica=='S')? 'Opcion unica': 'Opcion multiple'}}
+				<mat-icon style="cursor:pointer; margin-left: 15px" matTooltip="Ver opciones" matTooltipPosition="before" (click)="openDialogOpciones(miPregunta)">visibility</mat-icon>
+				<mat-icon style="cursor:pointer; margin-left: 15px" matTooltip="Eliminar Pregunta" matTooltipPosition="after" (click)="delete(miPregunta)">delete</mat-icon>
+      </li>
+      <mat-divider style="padding-bottom:1%;"></mat-divider>
+
+      </div>
+    </ul>
+  </div>
+
+
+
+
+
+
+	</div>

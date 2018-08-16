@@ -1,0 +1,29 @@
+<div style="display:flex">
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Fecha Inicial" [(ngModel)]="fechaInicial">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+  </mat-form-field>
+
+
+  <mat-form-field style="padding-left:2%">
+    <input matInput [matDatepicker]="picker2" placeholder="Fecha Final" [(ngModel)]="fechaFinal">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2 startView="year" [startAt]="startDate"></mat-datepicker>
+  </mat-form-field>
+
+</div>
+
+<mat-form-field>
+  <mat-select placeholder="Seleccione un cuestionario" [(ngModel)]="cuestionario">
+    <mat-option *ngFor="let cuest of cuestionarios" [value]="cuest.codigo">
+      {{ cuest.nombre }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div style="display:flex">
+<button mat-raised-button name="button" (click)="cancel()">cancelar</button>
+<button mat-raised-button name="button" (click)="closeDialog()">Modificar</button>
+</div>

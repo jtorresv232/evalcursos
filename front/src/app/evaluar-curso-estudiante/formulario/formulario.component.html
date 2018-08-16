@@ -1,0 +1,70 @@
+<div class="principal">
+
+
+  <!--Progress-->
+  <!--<div class="bar-container">
+    <ul class="progressbar">
+      <li [ngClass]="(opcion=='materia' || materiaSelected>0)? 'progress2':'progress'" (click)="aMateria()"><div class="mymarg">Materia</div></li>
+      <li [ngClass]="materiaSelected>0? 'progress2':'progress'" (click)="validarAGrupo();aGrupo()"><div class="mymarg">Grupo</div></li>
+      <li [ngClass]="grupoSelected>0? 'progress2':'progress'" (click)="validarAProfesor();aProfesor()"><div class="mymarg">Profesor</div></li>
+      <li [ngClass]="profesorSelected>0? 'progress2':'progress'" (click)="validarAFormulario()"><div class="mymarg">Formulario</div></li>
+    </ul>
+  </div>-->
+  <div class="bar-container">
+    <span class="myspan">Evaluar > Formulario de evaluacion</span>
+  </div>
+  <!--FIN progress-->
+
+  <div style="height:2%">
+    <span></span>
+  </div>
+
+  <div class="myBar">
+    <!--<span>{{(opcion!="materia")?"Seleccione un "+ opcion : "Seleccione una "+ opcion}}</span>-->
+    <span>Formulario de evaluacion</span>
+  </div>
+
+<mat-card style="width:60%; margin-left:20%; margin-right:20%;padding-bottom:3px; overflow:auto">
+  <div *ngIf="pDone && cDone">
+  	<table style="width:100%;padding-bottom:3%">
+      <thead>
+      <tr>
+        <th style="width:60%">Pregunta</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+      </tr>
+      </thead>
+      <tbody  style="padding:0px; margin:0px" *ngFor="let micategoria of categorias">
+          <tr>
+            <th style="padding:0.5" colspan="6">{{micategoria.nombre}}</th>
+          </tr>
+          <tr *ngFor="let pregunta of preguntas|filterByCategoria:micategoria.codigo">
+            <td>{{pregunta.texto}}</td>
+          <td *ngFor="let calificacion of calificaciones, let i=index">
+            <label class="radioContainer">
+              <input type="radio" name="{{pregunta.codigo}}" value="{{index+1}}" [checked]="idx === 0" (change)="seleccionada(pregunta,calificacion)">
+              <span class="circle"></span>
+            </label>
+          </td>
+
+          </tr>
+      </tbody>
+    </table>
+  </div>
+
+<div style="display:block;width:100%;">
+  <button mat-raised-button class="evaluar" (click)="evaluar()" type="button" name="button">Evaluar</button>
+  <button mat-raised-button class="cancelar" type="button" name="button">Cancelar</button>
+
+</div>
+
+</mat-card>
+
+  <div style="height:2%">
+    <span></span>
+  </div>
+
+</div>

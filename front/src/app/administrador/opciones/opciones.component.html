@@ -1,0 +1,13 @@
+<mat-card>
+<mat-card-header>
+  <mat-card-title><h1>Opciones de respuesta</h1></mat-card-title>
+  <mat-card-subtitle><h2 style="color:gray">{{data.pregunta}}</h2></mat-card-subtitle>
+</mat-card-header>
+    <mat-list role="list" *ngIf="opciones.length > 0">
+      <div *ngFor="let opcion of opciones">
+        <mat-list-item role="listitem">{{opcion.texto}}<span class="spacer"></span>{{(opcion.mixta=='NO')? 'No es mixta': 'Es mixta'}}</mat-list-item>
+        <mat-divider style="padding-bottom:1%;"></mat-divider>
+      </div>
+      </mat-list>
+      <mat-list-item *ngIf="opciones.length==0">Esta pregunta aun no tiene opciones</mat-list-item>
+</mat-card>

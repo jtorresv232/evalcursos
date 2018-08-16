@@ -1,0 +1,48 @@
+
+	<div class="principal">
+
+
+		<!--Progress-->
+		<div class="bar-container">
+	    <span class="myspan">Evaluar </span>
+	  </div>
+		<!--FIN progress-->
+
+		<div style="height:2%">
+			<span></span>
+		</div>
+
+		<div class="myBar">
+			<span>Cursos para evaluar</span>
+		</div>
+
+		<div *ngIf="mDone && dDone">
+			<ul>
+				<div *ngFor="let asignacion of arrayAsignaciones">
+				<li class="myli" [ngClass]="getStyle(asignacion.id)"> {{getTexto(asignacion.materia,asignacion.grupo,asignacion.docente)}}
+						<span class="spacer"></span> <a class="mya" (click)="reDireccionar(asignacion,asignacion.cuestionario)" *ngIf="validarFecha(asignacion)">Evaluar</a>
+						<mat-icon *ngIf="getStyle(asignacion.id)=='evaluada'">check_circle</mat-icon>
+						<mat-icon *ngIf="!validarFecha(asignacion) && getStyle(asignacion.id)!='evaluada'">watch_later</mat-icon>
+				</li>
+				<mat-divider style="padding-bottom:1%"></mat-divider>
+			</div>
+			</ul>
+
+		</div>
+
+		<div style="height:2%">
+			<span></span>
+		</div>
+
+
+
+		<!-- aqui-->
+
+		<!-- y aqui-->
+
+
+
+
+
+
+	</div>
